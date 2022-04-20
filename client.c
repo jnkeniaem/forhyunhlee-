@@ -1,14 +1,14 @@
 #include "ft_printf.h"
 #include "libft.h"
 #include <signal.h>
-
+//메모리 free 시켜줘야해
 void send(int pid, int b)
 {
     if (b == 0)
         kill(pid, SIGUSR1);
     else
         kill(pid, SIGUSR2);
-        usleep(100);//임의로 100 넣겠음
+    usleep(100);
 }
 
 void binary_num(int pid, int c, int fill)

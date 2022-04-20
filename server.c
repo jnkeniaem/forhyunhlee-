@@ -1,37 +1,6 @@
 #include <unistd.h>
 #include "ft_printf.h"
-
-//문자열 끝 전까지 이 과정 계속 반복
-
-handler(int signum, siginfo_t *, void *)
-{
-    int character[8];
-    int i;
-    int flag;
-
-    i = 0;
-    while (1)
-    {
-	    j = 0;
-        while (j < 8)
-        {
-            if (signum == SIGUSR1)
-            {
-                character[j] = 0;
-                j++;
-            }
-            if (signum == SIGUSR2)
-            {
-                character[j] = 1;
-                j++;
-            }
-        }
-        flag = handler_2(character);
-        if (flag == 0)
-            return ;
-    }
-
-}
+#include <signal.h>
 
 int handler_2(int *character)
 {
@@ -48,30 +17,55 @@ int handler_2(int *character)
             decimal += 1 << position;
         position++;
     }
-// 배열 요소 끝 부터 1 위치 시킴
-//10 진수로 만들고
     if (decimal == 0)
-    //반복을 끊어
-	    return 0;//flag
+	    return 0;
     ft_printf("%c", decimal);
     return 1;
 
 }
 
-int main(int argc)
+void handler(int signum)
 {
-    int     i;
-    char    *s;
-    struct sigaction s;
+    static int character[8];
+    static int i;
+    static int flag;
 
-    if (argc == 1)
+        //usleep(100);
+        if (signum == SIGUSR1)
+        {
+            
+            // character[i] = 0;
+            ft_printf("%d, i : %d, new i : ", 0, i);
+            i++;
+            ft_printf("%d\n", i);
+        }
+        if (signum == SIGUSR2)
+        {
+            
+            //character[i] = 1;
+            ft_printf("%d, i : %d, new i : ", 1, i);
+            i++;
+            ft_printf("%d\n", i);
+        }
+        /*flag = handler_2(character);
+        if (flag == 0)
+            return ;*/
+}
+
+int main(int argc, char **argv)
+{
+    int pid;
+
+    (void)argv;
+    pid = getpid();
+    if (argc == 1 && pid > 100 && pid < 99999)
     {
-        i = getpid();
-        ft_printf("server pid : %d\n", getpid());
-        s.sa_flags = SA_SIGINFO;
-        s.sa_sigacion = handler;
-        sigaction(SIGUSR1, &s, NULL); // sigaction == -1 실패 일때 예외처리
-        //두분꺼 코드 봤는데 다 while(1) pause(); main 마지막에 넣으셨네
-        return (0);
+        ft_printf("server pid : %d\n", pid);
+        while (1)
+        {
+            signal(SIGUSR1, handler);
+            signal(SIGUSR2, handler);
+        }
     }
+    return (0);
 }
