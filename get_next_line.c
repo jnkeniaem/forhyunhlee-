@@ -114,4 +114,5 @@ int main()
 {
 	int fd = open("a.c", O_RDONLY);
 	char *str = get_next_line(fd);
+	system("leaks a.out");
 }
