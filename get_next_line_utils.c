@@ -94,17 +94,3 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	//free((char *)s2);
 	return (newstr);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-//     char *s1 = malloc(3);
-//     char *s2 = NULL;
-
-//     ft_strlcpy(s1, "hi", 2);
-
-//     char *str = ft_strjoin(s1, s2);
-//     // printf("%s", str);
-//     // //free (str);
-//     // system("leaks a.out");
-// }
