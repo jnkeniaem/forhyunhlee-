@@ -1,0 +1,34 @@
+1. 전체를 3등분해서 맨위 그룹을 내림차순으로 정렬한다
+2. 맨 위의 삼각형을 pb해서 b에 담는다
+3. a의 맨 위 그룹을 오름차순으로 정렬한다 
+
+a 스택 출력
+	i = 0;
+	while (i < ptr_a->current)
+	{
+		printf("%d\n", ptr_a->stack[(ptr_a->front + i) % arg->total]);
+		i++;
+	}
+
+pa(&arg, &a, &b);
+pb(&arg, &a, &b);
+rra(&arg, &a);
+printf("%d %d %d %d\n", a.front, a.rear, b.front, b.rear);
+printf("ptr_b->front %d\n", ptr_b->front);
+printf("argtotal %d\n", arg->total);
+printf("iii%d\n", i);
+
+//숫자 중 제일 큰거 max에 담기
+b front랑 rear가 같은 경우는 b에 하나만 있거나 비어있거나
+a는 다 정렬됐거나 정렬된 부분있고 맨 밑에 부분이 정렬 안됐거나
+b에 하나있으면 rra하거나 pa하거나
+
+	// printf("ptr_b->current2 %d\n", ptr_b->current);
+	// printf("stack[ptr_b->front + i] %d\n", ptr_b->stack[(ptr_b->front + i) % parg->total]);
+	// printf("ptr_b->front + i %d\n", ptr_b->front + i);
+	// printf("(ptr_b->front + ptr_b->current / 2) 나누기 parg->total %d\n", (ptr_b->front + ptr_b->current / 2) % parg->total);
+	// printf("(ptr_b->front + i) 나누기 parg->total %d\n", (ptr_b->front + i) % parg->total);
+	// printf("ptr_b->rear %d\n", ptr_b->rear);
+		// printf("ptr_b->current %d\n", ptr_b->current);
+	// printf("!!!%d\n", ptr_b->stack[i]);
+	// printf("size %d\n", size);
